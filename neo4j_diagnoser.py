@@ -48,7 +48,7 @@ def set_up_program(diagnoser):
 
 # Given symptom, return tuple of remaining possible_diseases and ignored_diseases
 def narrow_down(diagnoser, symptom, possible_diseases, ignored_diseases):
-    pass
+    graph = None
 
 # Run Alexa to assess disease
 def run_alexa_program(diagnoser):
