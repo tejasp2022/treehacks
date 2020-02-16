@@ -55,6 +55,7 @@ async function count_max(symptom_counts) {
             max_elem = symptom_value[0];
         };
     };
+    console.log(max_elem);
     return max_elem;
 };
 
@@ -63,7 +64,9 @@ async function select_next_symptom() {
     var symptom;
     const symptoms_to_consider = new Set([...symptoms].filter(i => !examined_symptoms.has(i)));
     const symptoms_array = Array.from(symptoms_to_consider);
-    if (poss_diseases.size == 1) {
+    if (poss_diseases.size == 0) {
+        return "Sorry, unable to provide a diagnosis for your symptoms."
+    } else if (poss_diseases.size == 1) {
         return "Your diagnosis is: " + poss_diseases.values().next().value
     }
     for (let i = 0; i < symptoms_array.length; i++) {
@@ -139,12 +142,12 @@ async function caller() {
     var next_symptom = await process_first_symptom("Chest Pain");
     console.log(poss_diseases, ign_diseases, examined_symptoms);
     console.log(next_symptom);
-    next_symptom = await process_next_symptom(next_symptom, true);
-    console.log(poss_diseases, ign_diseases, examined_symptoms);
-    console.log(next_symptom);
     next_symptom = await process_next_symptom(next_symptom, false);
     console.log(poss_diseases, ign_diseases, examined_symptoms);
     console.log(next_symptom);
+    /*next_symptom = await process_next_symptom(next_symptom, false);
+    console.log(poss_diseases, ign_diseases, examined_symptoms);
+    console.log(next_symptom);*/
     driver.close();
 }
 
